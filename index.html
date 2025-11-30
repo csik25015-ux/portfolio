@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | WANG YUHANG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- リセットCSS & 基本設定 --- */
+        :root {
+            --primary-color: #546e7a; /* 知的なブルーグレー */
+            --accent-color: #26a69a;  /* 清潔感のあるティール */
+            --bg-color: #f9fafa;
+            --text-main: #333;
+            --text-light: #757575;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- レイアウト共通 --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        /* --- ヘッダー --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-list a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- メインビジュアル --- */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(135deg, #e0f2f1 0%, #eceff1 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        /* --- About (自己紹介 & ガクチカ) --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        /* プロフィールカード */
+        .profile-card {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .profile-univ {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* ガクチカデザイン */
+        .gakuchika-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .gakuchika-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .gakuchika-badge {
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .star-list {
+            display: grid;
+            gap: 25px;
+        }
+
+        .star-item {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 20px;
+        }
+
+        .star-label {
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            position: relative;
+        }
+        
+        .star-label span {
+            display: block;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        
+        .star-label small {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .star-content h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .star-content p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* --- Skills --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: var(--white);
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .skill-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 80px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* --- スマホ用レスポンシブ --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .star-item {
+                grid-template-columns: 1fr;
+                gap: 5px;
+                border-bottom: 1px dashed #eee;
+                padding-bottom: 20px;
+            }
+
+            .star-item:last-child {
+                border-bottom: none;
+            }
+
+            .star-label {
+                text-align: left;
+                display: flex;
+                align-items: baseline;
+                gap: 10px;
+            }
+            
+            .gakuchika-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <div class="logo">My Portfolio</div>
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Hello, I'm WANG.</h1>
+            <p>Web Design / Planning / Management</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="about-grid">
+                <div class="profile-card">
+                    <div class="profile-name">WANG YUHANG</div>
+                    <div class="profile-univ">日本大学 理工学部 1年</div>
+                    <p>常に「効率」と「継続」を意識し、目標達成に向けて自律的に行動できることが私の強みです。</p>
+                </div>
+
+                <div class="gakuchika-box">
+                    <div class="gakuchika-title">
+                        <span class="gakuchika-badge">強み</span>
+                        計画的な自己管理で掴んだ成果
+                    </div>
+                    
+                    <div class="star-list">
+                        <div class="star-item">
+                            <div class="star-label">
+                                <span>S</span><small>状況</small>
+                            </div>
+                            <div class="star-content">
+                                <h4>時間の制約と挑戦</h4>
+                                <p>往復3時間の通学と学業に追われ、練習時間が十分に確保できない中で、趣味であるギターの上達に取り組みました。</p>
+                            </div>
+                        </div>
+
+                        <div class="star-item">
+                            <div class="star-label">
+                                <span>T</span><small>課題</small>
+                            </div>
+                            <div class="star-content">
+                                <h4>練習不足による停滞</h4>
+                                <p>練習が断続的になりがちで上達を実感できず、週の練習時間は3時間未満と伸び悩んでいました。</p>
+                            </div>
+                        </div>
+
+                        <div class="star-item">
+                            <div class="star-label">
+                                <span>A</span><small>行動</small>
+                            </div>
+                            <div class="star-content">
+                                <h4>隙間時間の活用と習慣化</h4>
+                                <p>通学時間を動画でのイメージトレーニングに充てる改革を実施。さらに毎朝30分早起きして基礎練習を習慣化し、進捗を可視化。「1週間で1曲マスター」という短期目標を設定し、計画的に実践しました。</p>
+                            </div>
+                        </div>
+
+                        <div class="star-item">
+                            <div class="star-label">
+                                <span>R</span><small>結果</small>
+                            </div>
+                            <div class="star-content">
+                                <h4>練習量の倍増と習得</h4>
+                                <p>3ヶ月で基礎コード8種類を習得し、練習時間は週7時間以上に倍増。この経験から、限られた時間で成果を出す計画力と自己管理力を培いました。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div></div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-name">HTML/CSS</div>
+                    <small>基礎的なコーディング</small>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Office</div>
+                    <small>Word / Excel / PowerPoint</small>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">English</div>
+                    <small>TOEIC 750点</small>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Guitar</div>
+                    <small>継続的な練習と演奏</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div style="text-align: center;">
+                <p>ご連絡は以下のメールアドレスまでお願いいたします。</p>
+                <p style="font-size: 1.2rem; font-weight: 700; margin-top: 20px; color: var(--primary-color);">
+                   csik25015@g.nihon-u.ac.jp
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 WANG YUHANG All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
